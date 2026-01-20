@@ -42,8 +42,9 @@ result_logistic_model
 
 # Sensitivity Analysis 3: MDD (baseline based on primary care data, ICD-10, and UKB Filed ID)
 # Corresponding cleaning methods can be found in the Supplement Table 7 of the original article doi.org/10.1016/j.biopsych.2022.08.026
+# MDD_ICD_baseline2 refers to the cases of MDD diagnosed based on ICD10 before 2011/1/1
 
-data4$MDD_V2V3_ICD_UKB <- as.factor(ifelse(data4.1$MDD_ICD_baseline == 1| data4.1$MDD_V2V3 == 1 | data4$MDD_UKB == 1, 1, 0))
+data4$MDD_V2V3_ICD_UKB <- as.factor(ifelse(data4.1$MDD_ICD_baseline2 == 1| data4.1$MDD_V2V3 == 1 | data4$MDD_UKB == 1, 1, 0))
 logistic_model <- glm(data4.1$MDD_V2V3_ICD_UKB ~ 
                         data4.1$tnf_grs_group + Age + Sex + assessment_centre + Genotype_batch1 + 
                         pc1 + pc2 + pc3 + pc4 + pc5 + pc6 + pc7 + pc8 + pc9 + pc10, 
