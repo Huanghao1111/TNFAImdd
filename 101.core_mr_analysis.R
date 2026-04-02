@@ -5,6 +5,14 @@ mr_common("ukb-d-30710_irnt.csv", "MDD2025_PGC_no23andMe_noUKBB_eur.csv", p1=5e-
           local_clump = TRUE, r2 = 0.3, kb = 100, gene = "TNF", steiger = T,
           eaf_threshold = 0.01, gene_win = 100)
 
+# Notes
+# For the binary outcome (MDD, measured in log odds units):
+# R² = [(logOR)² × popaf× (1- popaf)] / [(logOR)² × popaf× (1- popaf) + π²/3]
+# popaf = get_population_allele_frequency(eaf, case_proportion, exp(logOR), prevalence)
+# case_proportion = ncase / (ncase + ncontrol)
+# For the continuous exposures: R2= (beta/se)2/ (samplesize - 2 + (beta/se)2)
+# After computing the R² values for the exposure and outcome, we ran the Steiger test for each SNP to check if the exposure R² exceeded the outcome R².
+
 # TNF_CRP.csv contains the extracted SNPs.
 # To represent a decrease in TNF-mediated CRP, the beta values were multiplied by −1.
 mr_common("TNF_CRP.csv", "MDD2025_PGC_no23andMe_noUKBB_eur.csv", no_clump = TRUE)
